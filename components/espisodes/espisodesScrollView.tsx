@@ -1,12 +1,12 @@
 import { ActivityIndicator, Alert, FlatList, FlatListComponent, SafeAreaView, ScrollView, StyleSheet, Text, Touchable, TouchableOpacity, View } from "react-native";
-import { Character } from "./characterType";
-import { CharacterCard } from "./characterCard";
+import { Episode } from "./episodesType";
+import { EspisodesCard } from "./episodesCard";
 import { useEffect, useRef, useState } from "react";
 import { DataSource } from "./dataSource";
-import { CharacterResult } from "./characterResult";
+import { EpisodesResult } from "./episodesResult";
 
 
-export default function CharacterScrollView(){
+export default function EpisodesScrollView(){
     const [loading, setLoading] = useState(false);
     /* const characters : Character[] = [
         //objetos
@@ -25,7 +25,7 @@ export default function CharacterScrollView(){
 
     const [page, setPage] = useState(1);
 
-    const [data, setData] = useState<CharacterResult>({
+    const [data, setData] = useState<EpisodesResult>({
         info: {
             pages: 0,
             count: 0,
@@ -49,7 +49,7 @@ export default function CharacterScrollView(){
 
     useEffect(() => {
         setLoading(true); //esta crgando 
-        dataSource.getCharacters(page)
+        dataSource.getEpisodes(page)
         .then((reponse) => {
 
             //conservar los personajes ya cargados accediendo al estado acyual sacando una copia al estado de data y unirno con el servidor 
@@ -82,11 +82,11 @@ export default function CharacterScrollView(){
                 disabled={data.info.prev === null}><Text>Anterior</Text></TouchableOpacity>
  */}
                 <View style={styles.rowtext}>
-                    <Text style={styles.textWhite}>Página</Text> 
+                    <Text style={styles.textWhite}>Paguína</Text> 
                     <Text style={styles.textWhite}>{page}</Text> 
                     {/* numero de pagina que manda la Api */}
                     <View>
-                        <Text style={styles.textWhite}>Personajes {data.results.length}</Text>
+                        <Text style={styles.textWhite}>Episodios {data.results.length}</Text>
                     </View>
 
                     <Text style={styles.textWhite}>de</Text> 
@@ -116,8 +116,8 @@ export default function CharacterScrollView(){
             <FlatList
             data={data.results}
             renderItem= {({item}) => (
-                <CharacterCard
-                character={item} 
+                <EspisodesCard
+                episode={item} 
                 />
             )}
             keyExtractor={item => item.id.toString()}
@@ -137,7 +137,7 @@ export default function CharacterScrollView(){
 
 const styles = StyleSheet.create({
     content: {
-        /* marginTop: 0, */
+       /*  marginTop: 0, */
         padding: 8,
         width: "100%",
         height: "100%"

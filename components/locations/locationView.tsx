@@ -1,13 +1,14 @@
 import { ActivityIndicator, Alert, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { CharacterCard } from "./characterCard";
 import { useEffect, useState } from "react";
 import { DataSource } from "./dataSource";
-import { CharacterResult } from "./characterResult";
+import { LocationResult } from "./locationResult";
+import { LocationCard } from "./locationCard";
 
-export function CharacterView() {
+
+export function LocationView() {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
-    const [data, setData] = useState<CharacterResult>({
+    const [data, setData] = useState<LocationResult>({
         info: {
             pages: 0,
             count: 0,
@@ -20,24 +21,26 @@ export function CharacterView() {
     const dataSource = new DataSource();
 
     useEffect(() => {
-        setLoading(true);
-        dataSource.getCharacters(page)
-            .then((response) => {
-                setData(response);
+        setLoading(true); //esta crgando 
+        dataSource.getLocations(page)
+            .then((reponse) => {
+                setData(reponse)
             })
             .catch((error) => {
-                Alert.alert(`Error: ${error.message}`);
+                Alert.alert(`Error: ${error.menssage}`);
             })
             .finally(() => {
-                setLoading(false);
-            });
+                setLoading(false);//ya no testa cragando 
+            })
+
     }, [page]);
+
 
     return (
         <SafeAreaView style={styles.content}>
             <View style={styles.nav}>
                 <TouchableOpacity 
-                    style={[styles.buttons, data.info.prev === null ? styles.disable : undefined]}
+                    style={[styles.buttons, data.info.prev === null ? styles.disable : null]}
                     onPress={() => setPage(page - 1)}
                     disabled={data.info.prev === null}>
                     <Text style={styles.textWhite}>Anterior</Text>
@@ -51,7 +54,7 @@ export function CharacterView() {
                 </View>
 
                 <TouchableOpacity 
-                    style={[styles.buttons, data.info.next === null ? styles.disable : undefined]}
+                    style={[styles.buttons, data.info.next === null ? styles.disable : null]}
                     onPress={() => setPage(page + 1)}
                     disabled={data.info.next === null}>
                     <Text style={styles.textWhite}>Siguiente</Text>
@@ -64,7 +67,7 @@ export function CharacterView() {
                 style={styles.flatlist}
                 data={data.results}
                 renderItem={({ item }) => (
-                    <CharacterCard character={item} />
+                    <LocationCard location={item} />
                 )}
                 keyExtractor={item => item.id.toString()}
             />

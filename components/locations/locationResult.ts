@@ -1,11 +1,11 @@
-import { Character } from "./characterType"
+import { Location } from "./locationType"
 
-export type CharacterResult = {
+export type LocationResult = {
     info: {
         count: number,
         pages: number,
         next: string | null,
         prev: string | null,
     }
-    results: Character[]
+    results: Location[]
 }

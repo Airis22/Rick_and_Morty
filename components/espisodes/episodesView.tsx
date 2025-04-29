@@ -1,13 +1,14 @@
 import { ActivityIndicator, Alert, FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { CharacterCard } from "./characterCard";
 import { useEffect, useState } from "react";
 import { DataSource } from "./dataSource";
-import { CharacterResult } from "./characterResult";
+import { EpisodesResult } from "./episodesResult";
+import { EspisodesCard } from "./episodesCard";
 
-export function CharacterView() {
+
+export function EpisodesView() {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
-    const [data, setData] = useState<CharacterResult>({
+    const [data, setData] = useState<EpisodesResult>({
         info: {
             pages: 0,
             count: 0,
@@ -21,7 +22,7 @@ export function CharacterView() {
 
     useEffect(() => {
         setLoading(true);
-        dataSource.getCharacters(page)
+        dataSource.getEpisodes(page)
             .then((response) => {
                 setData(response);
             })
@@ -64,7 +65,7 @@ export function CharacterView() {
                 style={styles.flatlist}
                 data={data.results}
                 renderItem={({ item }) => (
-                    <CharacterCard character={item} />
+                    <EspisodesCard episode={item} />
                 )}
                 keyExtractor={item => item.id.toString()}
             />

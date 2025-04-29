@@ -1,11 +1,11 @@
-import { Character } from "./characterType"
+import { Episode } from "./episodesType"
 
-export type CharacterResult = {
+export type EpisodesResult = {
     info: {
         count: number,
         pages: number,
         next: string | null,
         prev: string | null,
     }
-    results: Character[]
+    results: Episode[]
 }

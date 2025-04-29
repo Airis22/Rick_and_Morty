@@ -1,12 +1,12 @@
 import { ActivityIndicator, Alert, FlatList, FlatListComponent, SafeAreaView, ScrollView, StyleSheet, Text, Touchable, TouchableOpacity, View } from "react-native";
-import { Character } from "./characterType";
-import { CharacterCard } from "./characterCard";
+import { Location } from "./locationType";
+import { LocationCard } from "./locationCard";
 import { useEffect, useRef, useState } from "react";
 import { DataSource } from "./dataSource";
-import { CharacterResult } from "./characterResult";
+import { LocationResult } from "./locationResult";
 
 
-export default function CharacterScrollView(){
+export default function LocationScrollView(){
     const [loading, setLoading] = useState(false);
     /* const characters : Character[] = [
         //objetos
@@ -25,7 +25,7 @@ export default function CharacterScrollView(){
 
     const [page, setPage] = useState(1);
 
-    const [data, setData] = useState<CharacterResult>({
+    const [data, setData] = useState<LocationResult>({
         info: {
             pages: 0,
             count: 0,
@@ -49,7 +49,7 @@ export default function CharacterScrollView(){
 
     useEffect(() => {
         setLoading(true); //esta crgando 
-        dataSource.getCharacters(page)
+        dataSource.getLocations(page)
         .then((reponse) => {
 
             //conservar los personajes ya cargados accediendo al estado acyual sacando una copia al estado de data y unirno con el servidor 
@@ -116,8 +116,8 @@ export default function CharacterScrollView(){
             <FlatList
             data={data.results}
             renderItem= {({item}) => (
-                <CharacterCard
-                character={item} 
+                <LocationCard
+                location={item} 
                 />
             )}
             keyExtractor={item => item.id.toString()}
@@ -137,7 +137,7 @@ export default function CharacterScrollView(){
 
 const styles = StyleSheet.create({
     content: {
-        /* marginTop: 0, */
+       /*  marginTop: 60, */
         padding: 8,
         width: "100%",
         height: "100%"
